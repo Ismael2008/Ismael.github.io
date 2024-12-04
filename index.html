@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glosario</title>
+  <style>
+    body {
+      font-family: Comic Sans MS, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle, rgb(136, 136, 138), green);
+    }
+    h1 {
+      margin-top: 100px;
+      font-size: 2em;
+    }
+
+    h2 {
+      margin-top: 100px;
+      font-size: 2em;
+    }
+
+    .folder {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px;
+      background-color: #f3f3f3;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100px; /* Tamaño flexible */
+      text-align: center;
+      font-size: 2em;
+    }
+    .audio-container {
+      display: none;
+      margin-top: 20px;
+      padding: 10px;
+    }
+    audio {
+      display: block;
+      margin: 10px auto;
+      width: 90%;
+    }
+    .audio-name {
+      font-size: 1.5em; /* Tamaño del texto aumentado */
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .footer {
+      margin-top: 100px;
+      font-size: 30px;
+      color: #131212;
+    }
+
+    /* Diseño responsivo con media queries */
+    @media (max-width: 600px) {
+    h1 {
+      font-size: 1.5em;
+    }
+
+    .folder {
+      width: 80px; /* Reducir el tamaño de las carpetas */
+      font-size: 1.5em; /* Texto más pequeño */
+    }
+
+    audio {
+      width: 100%; /* Ocupa todo el ancho disponible */
+    }
+
+    .audio-name {
+      font-size: 1.2em; /* Reducir tamaño en móviles */
+    }
+   }
+  </style>
+</head>
+<body>
+  <h1>Glosario de Informática</h1>
+  <div id="folders"></div>
+  <div id="audios" class="audio-container"></div>
+  <div class="footer">
+    <p>Hoyos Ismael Angel</p>
+  </div>
+
+  <script>
+    // Configuración de las carpetas: nombre visible y audios con nombres personalizados
+    const folderData = [
+      {
+        name: "A",
+        audios: [
+          { src: "A1.mp3", name: "Acción" },
+          { src: "A2.mp3", name: "Administrador de archivos" },
+          { src: "A3.mp3", name: "Ajuste" }
+        ]
+      },
+      {
+        name: "B",
+        audios: [
+          { src: "B1.mp3", name: "Backup" },
+          { src: "B2.mp3", name: "Barra de estado" },
+          { src: "B3.mp3", name: "Barra de menús" }
+        ]
+      },
+      {
+        name: "C",
+        audios: [
+          { src: "C1.mp3", name: "Caché" },
+          { src: "C2.mp3", name: "Campo" },
+          { src: "C3.mp3", name: "Carpeta" }
+        ]
+      },
+      {
+        name: "D",
+        audios: [
+          { src: "D1.mp3", name: "Dato" },
+          { src: "D2.mp3", name: "Digital" },
+          { src: "D3.mp3", name: "Dirección" }
+        ]
+      },
+      {
+        name: "E",
+        audios: [
+          { src: "E1.mp3", name: "Espaciado" },
+          { src: "E2.mp3", name: "Estilo" },
+          { src: "E3.mp3", name: "Estrella" }
+        ]
+      },
+      {
+        name: "F",
+        audios: [
+          { src: "F1.mp3", name: "Formato" },
+          { src: "F2.mp3", name: "Fórmula" },
+          { src: "F3.mp3", name: "Foro" }
+        ]
+      },
+      {
+        name: "G",
+        audios: [
+          { src: "G1.mp3", name: "Generación de computadoras" },
+          { src: "G2.mp3", name: "GIF" },
+          { src: "G3.mp3", name: "Gigabyte (Gb)" }
+        ]
+      },
+      {
+        name: "H",
+        audios: [
+          { src: "H1.mp3", name: "Hardware" },
+          { src: "H2.mp3", name: "Hipertexto" },
+          { src: "H3.mp3", name: "HTM" }
+        ]
+      },
+      {
+        name: "I",
+        audios: [
+          { src: "I1.mp3", name: "Icono de documento" },
+          { src: "I2.mp3", name: "Icono de programa" },
+          { src: "I3.mp3", name: "Impresora" }
+        ]
+      },
+      {
+        name: "J",
+        audios: [
+          { src: "J1.mp3", name: "Joystick" },
+          { src: "J2.mp3", name: "JPG" },
+          { src: "J3.mp3", name: "Justificación" }
+        ]
+      },
+      {
+        name: "K",
+        audios: [
+          { src: "K1.mp3", name: "Kilobyte (Kb)" },
+        ]
+      },
+      {
+        name: "L",
+        audios: [
+          { src: "L1.mp3", name: "LAN" },
+          { src: "L2.mp3", name: "LAN Server" },
+          { src: "L3.mp3", name: "Lápiz óptico" }
+        ]
+      },
+      {
+        name: "M",
+        audios: [
+          { src: "M1.mp3", name: "MAN" },
+          { src: "M2.mp3", name: "Margen" },
+          { src: "M3.mp3", name: "Maximizar" }
+        ]
+      },
+      {
+        name: "N",
+        audios: [
+          { src: "N1.mp3", name: "Navegador" },
+          { src: "N2.mp3", name: "NetBIOS" },
+          { src: "N3.mp3", name: "Notebook" }
+        ]
+      },
+      {
+        name: "O",
+        audios: [
+          { src: "O1.mp3", name: "Objeto" },
+          { src: "O2.mp3", name: "Off-line" },
+          { src: "O3.mp3", name: "On-line" }
+        ]
+      },
+      {
+        name: "P",
+        audios: [
+          { src: "P1.mp3", name: "Panel de control" },
+          { src: "P2.mp3", name: "Parámetro" },
+          { src: "P3.mp3", name: "Parámetro actual" }
+        ]
+      },
+      {
+        name: "Q",
+        audios: [
+          { src: "Q1.mp3", name: "QT" },
+          { src: "Q2.mp3", name: "QWERTY" },
+        ]
+      },
+      {
+        name: "R",
+        audios: [
+          { src: "R1.mp3", name: "Registro" },
+          { src: "R2.mp3", name: "Resolución" },
+          { src: "R3.mp3", name: "Ruta de acceso" }
+        ]
+      },
+      {
+        name: "S",
+        audios: [
+          { src: "S1.mp3", name: "Sector" },
+          { src: "S2.mp3", name: "Sentencia" },
+          { src: "S3.mp3", name: "Sistema informático" }
+        ]
+      },
+      {
+        name: "T",
+        audios: [
+          { src: "T1.mp3", name: "Teclado" },
+          { src: "T2.mp3", name: "Terabyte (Tb)" },
+          { src: "T3.mp3", name: "Tipo de dato" }
+        ]
+      },
+      {
+        name: "U",
+        audios: [
+          { src: "U1.mp3", name: "Unidad central de procesamiento" },
+          { src: "U2.mp3", name: "Unix" },
+          { src: "U3.mp3", name: "Usuario" }
+        ]
+      },
+      {
+        name: "V",
+        audios: [
+          { src: "V1.mp3", name: "Variable" },
+          { src: "V2.mp3", name: "Variable global" },
+          { src: "V3.mp3", name: "Variable local" }
+        ]
+      },
+      {
+        name: "W",
+        audios: [
+          { src: "W1.mp3", name: "WAN" },
+          { src: "W2.mp3", name: "WAV" },
+          { src: "W3.mp3", name: "Windows NT Server" }
+        ]
+      },
+      {
+        name: "X",
+        audios: [
+          { src: "X1.mp3", name: "XLS" },
+          { src: "X2.mp3", name: "XLW" },
+        ]
+      },
+      {
+        name: "Y",
+        audios: [
+          { src: "Y1.mp3", name: "Yellow pages" },
+        ]
+      },
+     
+      // Agrega más carpetas con audios aquí
+    ];
+
+    const folderContainer = document.getElementById("folders");
+    const audioContainer = document.getElementById("audios");
+
+    // Crear carpetas dinámicamente
+    folderData.forEach((folder) => {
+      const folderElement = document.createElement("div");
+      folderElement.className = "folder";
+      folderElement.textContent = folder.name;
+      folderElement.onclick = () => showAudios(folder.name, folder.audios);
+      folderContainer.appendChild(folderElement);
+    });
+
+    // Mostrar audios al hacer clic en una carpeta
+    function showAudios(name, audios) {
+      audioContainer.innerHTML = `<h2>Audios de la carpeta con la letra "${name}"</h2>`;
+      audios.forEach((audioData) => {
+        const label = document.createElement("p");
+        label.textContent = audioData.name;
+        label.className = "audio-name"; // Clase para estilos del nombre
+
+        const audio = document.createElement("audio");
+        audio.controls = true;
+        audio.src = audioData.src;
+
+        // Añadir el texto antes del audio
+        audioContainer.appendChild(label);
+        audioContainer.appendChild(audio);
+      });
+      audioContainer.style.display = "block";
+    }
+  </script>
+</body>
+</html>
